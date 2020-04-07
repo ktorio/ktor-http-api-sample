@@ -1,13 +1,12 @@
 package com.jetbrains.handson.httpapi.routes
 
-import com.jetbrains.handson.httpapi.models.Customer
+import com.jetbrains.handson.httpapi.models.*
 import io.ktor.application.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.*
 import io.ktor.routing.*
 
-val customerStorage = mutableListOf<Customer>()
 
 fun Route.customerRouting() {
     route("/customer") {
