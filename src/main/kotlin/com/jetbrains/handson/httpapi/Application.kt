@@ -1,11 +1,10 @@
 package com.jetbrains.handson.httpapi
 
-import com.jetbrains.handson.httpapi.routes.*
-import io.ktor.application.*
+import com.jetbrains.handson.httpapi.routes.registerCustomerRoutes
+import com.jetbrains.handson.httpapi.routes.registerOrderRoutes
+import io.ktor.application.Application
+import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
-import io.ktor.features.StatusPages
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
 import io.ktor.serialization.json
 
 
@@ -15,13 +14,6 @@ fun Application.module() {
     install(ContentNegotiation) {
         json()
     }
-    install(StatusPages) {
-        exception<InvalidEndpointException> {
-            call.respond(HttpStatusCode.ServiceUnavailable, "Server performed invalid operation")
-        }
-
-    }
     registerCustomerRoutes()
     registerOrderRoutes()
-    registerErrorSimulationRoutes()
 }
