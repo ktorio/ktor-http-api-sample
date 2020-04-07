@@ -11,19 +11,21 @@ import io.ktor.routing.*
 fun Route.customerRouting() {
     route("/customer") {
         get {
-            if (customerStorage.size > 0) {
+            if (customerStorage.isNotEmpty()) {
                 call.respond(customerStorage)
             } else {
                 call.respondText("No customers found", status = HttpStatusCode.NotFound)
             }
         }
         get("{id}") {
-            val id = call.parameters["id"] ?: ""
-            val customer = customerStorage.find { it.id.compareTo(id) == 0 }
-            if (customer != null) {
-                call.respond(customer)
-            } else {
-                call.respondText("Not Found", status = HttpStatusCode.NotFound)
+            val id = call.parameters["id"]
+            if (id != null) {
+                val customer = customerStorage.find { it.id.compareTo(id) == 0 }
+                if (customer != null) {
+                    call.respond(customer)
+                } else {
+                    call.respondText("Not Found", status = HttpStatusCode.NotFound)
+                }
             }
         }
         post {
@@ -35,11 +37,15 @@ fun Route.customerRouting() {
             call.respondText("Customer stored correctly", status = HttpStatusCode.Accepted)
         }
         delete("{id}") {
-            val id = call.parameters["id"] ?: ""
-            if (customerStorage.removeIf { it.id == id }) {
-                call.respondText("Customer removed correctly", status = HttpStatusCode.Accepted)
+            val id = call.parameters["id"]
+            if (id != null) {
+                if (customerStorage.removeIf { it.id == id }) {
+                    call.respondText("Customer removed correctly", status = HttpStatusCode.Accepted)
+                } else {
+                    call.respondText("Not Found", status = HttpStatusCode.NotFound)
+                }
             } else {
-                call.respondText("Not Found", status = HttpStatusCode.NotFound)
+                call.respondText("Bad Request", status = HttpStatusCode.BadRequest)
             }
         }
     }
