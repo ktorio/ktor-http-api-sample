@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 
 class OrderRouteTests {
     @Test
-    fun testGerOrder() {
+    fun testGetOrder() {
         withTestApplication({ module(testing = true) }) {
             handleRequest(HttpMethod.Get, "/order/2020-04-06-01").apply {
                 assertEquals(
