@@ -17,12 +17,11 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     implementation "io.ktor:ktor-serialization:$ktor_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$kotlin_serialization"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:$kotlin_serialization"
 
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
 }
