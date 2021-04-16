@@ -2,11 +2,10 @@ package com.jetbrains.handson.httpapi.routes
 
 import com.jetbrains.handson.httpapi.models.*
 import io.ktor.application.*
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
+import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
-
 
 fun Route.customerRouting() {
     route("/customer") {
@@ -35,7 +34,7 @@ fun Route.customerRouting() {
             // we should be accessing a mutable list in a thread-safe manner.
             // However, in production code we wouldn't be using mutable lists as a database!
             customerStorage.add(customer)
-            call.respondText("Customer stored correctly", status = HttpStatusCode.Accepted)
+            call.respondText("Customer stored correctly", status = HttpStatusCode.Created)
         }
         delete("{id}") {
             val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
