@@ -9,11 +9,7 @@ group 'com.jetbrains.handson'
 version '1.0-SNAPSHOT'
 
 repositories {
-    jcenter()
     mavenCentral()
-    maven {
-        url "https://kotlin.bintray.com/kotlinx"
-    }
 }
 
 dependencies {
