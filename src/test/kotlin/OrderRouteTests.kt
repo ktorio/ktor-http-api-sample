@@ -1,11 +1,7 @@
 import com.jetbrains.handson.httpapi.module
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.testing.handleRequest
-import io.ktor.server.testing.withTestApplication
-import org.junit.Test
-import kotlin.test.assertEquals
-
+import io.ktor.http.*
+import io.ktor.server.testing.*
+import kotlin.test.*
 
 class OrderRouteTests {
     @Test
